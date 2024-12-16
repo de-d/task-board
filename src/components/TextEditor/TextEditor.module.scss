@@ -1,0 +1,59 @@
+//.text_editor{
+//  background: #F4F6F8;
+//  border-radius: 8px;
+//}
+//
+//.toolbar {
+//  padding: 8px 20px 8px  20px;
+//  border-bottom: 1px solid white;
+//}
+//
+//.control_group {
+//  display: flex;
+//  flex-direction: row;
+//}
+//
+//.control_group button{
+//  display: flex;
+//  align-items: center;
+//}
+//
+//.content {
+//  margin-top: 10px;
+//  min-height: 150px;
+//  padding-left: 20px;
+//  padding-right: 20px;
+//}
+//
+//.content p {
+//}
+//
+//.content div {
+//  margin-top: 12px;
+//  font-size: 14px;
+//  font-weight: 400;
+//  border: none;
+//}
+
+
+.description {
+  margin-bottom: 16px;
+
+  .mantine-RichTextEditor-root {
+    border: none;
+
+    .mantine-RichTextEditor-toolbar {
+      margin-bottom: 2px;
+      border: none;
+      border-radius: 8px 8px 0 0;
+      background-color: #f4f6f8;
+    }
+
+    .mantine-RichTextEditor-typographyStylesProvider {
+      height: 116px;
+      overflow-y: auto;
+      background-color: #f4f6f8;
+      border-radius: 0 0 8px 8px;
+    }
+  }
+}

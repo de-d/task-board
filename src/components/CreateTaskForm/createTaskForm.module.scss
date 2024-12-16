@@ -1,0 +1,170 @@
+@use "../../styles/mixin" as *;
+
+.form {
+  .upper {
+    @include createTaskFildsBlock();
+  }
+
+  .middle {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+
+    .input {
+      width: calc(50% - 8px);
+
+      &:nth-child(2n + 1) {
+        margin-right: 16px;
+      }
+
+      @media (max-width: 577px) {
+        width: 100%;
+
+        &:nth-child(2n + 1) {
+          margin-right: 0;
+        }
+      }
+    }
+
+    @media (max-width: 577px) {
+      flex-wrap: nowrap;
+      flex-direction: column;
+    }
+  }
+
+  .description {
+    margin-bottom: 8px;
+
+    .mantine-RichTextEditor-root {
+      margin-bottom: 6px;
+      border: none;
+
+      .mantine-RichTextEditor-toolbar {
+        padding: 5px 10px;
+        margin-bottom: 2px;
+        border: none;
+        border-radius: 8px 8px 0 0;
+        background-color: #f4f6f8;
+      }
+
+      .mantine-RichTextEditor-typographyStylesProvider {
+        height: 116px;
+        overflow-y: auto;
+        background-color: #f4f6f8;
+        border-radius: 0 0 8px 8px;
+      }
+    }
+  }
+
+  .dropzone {
+    margin-bottom: 32px;
+
+    .previews {
+      margin-bottom: 16px;
+    }
+
+    .mantine-Dropzone-root {
+      padding: 20px;
+      border: 1px dashed rgb(219, 219, 219);
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+
+      .descr {
+        position: relative;
+        padding-left: 15px;
+        display: inline-block;
+        font-size: 12px;
+        color: #abbed1;
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: 3px;
+          left: 0;
+          background-image: url("../.././../public/img/createTaskPopup/paperclip.svg");
+          background-repeat: no-repeat;
+          width: 11px;
+          height: 12px;
+        }
+      }
+    }
+
+    .file {
+      display: inline-block;
+      position: relative;
+      padding: 5px 32px 5px 8px;
+      border-radius: 4px;
+      background-color: #f4f6f8;
+
+      &:not(:last-child) {
+        margin-right: 8px;
+      }
+
+      .descr {
+        font-size: 12px;
+        color: #3787eb;
+      }
+
+      .button {
+        position: absolute;
+        top: 8px;
+        right: 10px;
+        width: 12px;
+        height: 12px;
+
+        .line {
+          position: absolute;
+          top: 50%;
+          width: 100%;
+          height: 1px;
+          background-color: #abbed1;
+          border-radius: 50%;
+
+          &:nth-child(1) {
+            transform: translate(-50%, -50%) rotate(45deg);
+          }
+
+          &:nth-child(2) {
+            transform: translate(-50%, -50%) rotate(-45deg);
+          }
+        }
+      }
+    }
+  }
+
+  .lower {
+    @include createTaskFildsBlock();
+  }
+
+  .buttons {
+    .add {
+      @include addButton();
+    }
+
+    .cancel {
+      @include cancelButton();
+    }
+  }
+}
+
+.field {
+  margin-bottom: 6px;
+  background-color: #f4f6f8;
+  border: none;
+}
+
+.root {
+  margin-bottom: 32px;
+}
+
+.error {
+  font-size: 11px;
+  color: #eb597b;
+}
+
+.label {
+  font-size: 14px;
+  color: #a6a6a6;
+  font-weight: 400;
+}

@@ -1,0 +1,139 @@
+@use "../../../styles/mixin" as *;
+
+.project {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+
+  &__content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+
+    &_header {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding-top: 40px;
+
+      &_left {
+        display: flex;
+        flex-direction: row;
+        gap: 24px;
+      }
+
+      &_title {
+        font-size: 32px;
+        font-weight: 600;
+        letter-spacing: 0.6px;
+        margin: 0;
+      }
+
+      &_switch {
+        padding-top: 20px;
+        color: #a6a6a6;
+        cursor: pointer;
+      }
+
+      &_add {
+        margin-left: auto;
+      }
+    }
+
+    &_filters {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      width: 1200px;
+      padding-top: 18px;
+      padding-bottom: 20px;
+      gap: 16px;
+    }
+    &_tasks {
+      flex-grow: 1;
+      width: 100%;
+      height: 100vh;
+    }
+  }
+}
+
+.customBreadcrumbs {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  font-size: 14px;
+  margin: 1px 0 0 1px;
+  padding: 12px 0 12px 18px;
+  border-radius: 6px;
+  background: #f4f6f8;
+}
+
+.customSeparator {
+  margin: 0 11px;
+  color: #a6a6a6;
+}
+
+.pillsList {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: hidden;
+  gap: 8px;
+}
+
+.pill {
+  font-size: 10px;
+  white-space: nowrap;
+  color: #222222;
+  border-radius: 4px;
+}
+
+.input {
+  width: 264px;
+  height: 40px;
+  padding-left: 20px;
+  margin-top: 4px;
+  letter-spacing: 0.5px;
+  border-radius: 8px;
+}
+
+
+.inputField {
+  flex: 1;
+  min-width: 150px;
+}
+
+.root {
+  border-radius: 8px;
+  max-width: 304px;
+}
+
+.header {
+  margin-bottom: 5px;
+}
+
+.title {
+  font-size: 16px;
+  color: #222222;
+  font-weight: 600;
+}
+
+.add {
+  @include addButton();
+  padding: 6px;
+}
+
+.cancel {
+  @include cancelButton();
+  padding: 6px;
+}
+.multiSelectOption {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}

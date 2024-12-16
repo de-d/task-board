@@ -1,0 +1,27 @@
+.form-field {
+  width: inherit;
+  margin-bottom: 18px;
+
+  .label {
+    display: block;
+    margin-bottom: 7px;
+  }
+
+  .input-wrapper {
+    position: relative;
+    width: inherit;
+
+    .placeholder {
+      position: absolute;
+      top: 12px;
+      left: 21px;
+      pointer-events: none;
+    }
+  }
+
+  .error {
+    margin-bottom: 24px;
+    font-size: 11px;
+    color: #eb597b;
+  }
+}

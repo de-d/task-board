@@ -1,0 +1,81 @@
+@use "../../styles/mixin" as *;
+
+.container {
+  @include container();
+
+  .form {
+    width: 302px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 14px;
+    color: #a6a6a6;
+
+    .heading {
+      display: block;
+      margin-bottom: 27px;
+      text-align: center;
+      font-size: 32px;
+      font-weight: 600;
+      color: #1b1a1d;
+    }
+
+    .input {
+      width: inherit;
+      margin-bottom: 8px;
+      padding: 11px 19px;
+      border-radius: 8px;
+      outline: 1px solid #f4f6f8;
+      border: none;
+      background-color: #f4f6f8;
+      color: #222222;
+      transition: outline 0.2s;
+
+      &:hover {
+        outline-color: #3787eb;
+      }
+
+      &:focus {
+        outline-color: #abbed1;
+      }
+
+      &.error {
+        background-color: #fff1f0;
+      }
+    }
+
+    .validation {
+      margin-bottom: 18px;
+      color: #eb597b;
+    }
+
+    .button-section {
+      position: relative;
+      width: inherit;
+
+      .submit {
+        padding: 12px;
+        border-radius: 6px;
+        outline: 2px solid transparent;
+        width: inherit;
+        background-color: #3787eb;
+        color: #ffffff;
+        transition: background-color 0.2s, outline 0.2s;
+
+        &:hover {
+          background-color: #4b93ed;
+        }
+
+        &:focus {
+          outline-color: #222222;
+        }
+
+        &:active {
+          background-color: #0053ad;
+          outline-color: transparent;
+        }
+      }
+    }
+  }
+}

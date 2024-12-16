@@ -1,0 +1,91 @@
+.wrapper {
+    position: relative;
+    border: 1px dashed #ABBED1;
+    margin-top: 16px;
+
+}
+.wrapper:hover {
+    cursor: pointer;
+}
+
+
+.dropzone {
+    height: 64px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0;
+}
+
+.dropContent {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* отступ между иконкой и текстом */
+}
+
+.dropText {
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    pointer-events: none;
+}
+
+.previewContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 16px;
+    gap: 8px;
+}
+
+
+
+.previewItem {
+    height: auto;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    word-wrap: break-word;
+    justify-content: center;
+    padding: 8px;
+    border-radius: 8px;
+    gap: 12px;
+    width: 200px;
+    background: #F4F6F8;
+}
+
+.previewImage {
+    border-radius: 8px;
+}
+
+.filesImage {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.ImageInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.previewItem a {
+    font-size: 12px;
+    font-weight: 400;
+    color: #3787EB;
+}
+
+.ImageInfo span  {
+    font-size: 12px;
+    border-radius: 8px;
+    color: #ABBED1
+}

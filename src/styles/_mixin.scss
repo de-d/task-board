@@ -1,0 +1,61 @@
+@mixin container() {
+  margin: 0 auto;
+  padding: 0 15px 0 15px;
+  max-width: 1470px;
+}
+
+@mixin createTaskFildsBlock() {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 32px;
+
+  .input {
+    width: 285px;
+
+    &:not(:last-child) {
+      margin-right: 10px;
+    }
+
+    @media (max-width: 768px) {
+      width: 100%;
+
+      &:not(:last-child) {
+        margin: 0px;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+@mixin addButton() {
+  padding: 12px;
+  margin-right: 8px;
+  width: 130px;
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: #3787eb;
+  color: #fff;
+  width: 130px;
+
+  &:hover {
+    background-color: #4b93ed;
+  }
+}
+
+@mixin cancelButton() {
+  padding: 11px;
+  width: 130px;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: 1px solid #3787eb;
+  background-color: transparent;
+  color: #3787eb;
+  width: 130px;
+
+  &:hover {
+    background-color: #eef5fc;
+  }
+}

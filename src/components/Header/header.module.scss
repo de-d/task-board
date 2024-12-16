@@ -1,0 +1,16 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  padding: 0px 31px 0px 14px;
+  background: #F4F6F8;
+  border-bottom: 1px solid #D9D9D9;
+
+  &__button {
+    min-width: 106px;
+    min-height: 40px;
+    font-size: 14px;
+  }
+}

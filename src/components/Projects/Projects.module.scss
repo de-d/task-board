@@ -1,0 +1,87 @@
+.projects {
+  &__card {
+    &_content {
+      display: flex;
+      flex-direction: column;
+      width: 264px;
+      height: 124px;
+      border-radius: 8px;
+      background: #f4f6f8;
+      padding: 16px 16px 0 16px;
+      border: 1px solid transparent;
+      position: relative;
+      z-index: 2;
+
+      &:hover {
+        border: 1px solid #3787eb;
+
+        .projects__card_header_buttons {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+    }
+
+    &_header {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+
+      &_buttons {
+        display: flex;
+        flex-direction: row;
+        margin-left: auto;
+        gap: 4px;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 33;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+
+        &__delete {
+          cursor: pointer;
+          &:hover {
+            filter: brightness(0) saturate(100%) invert(21%) sepia(95%) saturate(7495%) hue-rotate(-4deg) brightness(91%) contrast(108%);
+          }
+        }
+        &__edit {
+          cursor: pointer;
+
+          &:hover {
+            filter:  saturate(4) invert(22%) sepia(100%) saturate(1135%) ;
+          }
+        }
+        &__favorite {
+          cursor: pointer;;
+          &:hover {
+            filter:  saturate(4) invert(12%) saturate(250%) ;
+          }
+        }
+
+        &__archive {
+          width: 72px;
+          height: 20px;
+          margin: 4px 0 0 8px;
+          font-size: 12px;
+          padding: 0 8.5px;
+          border-radius: 4px;
+          color: #FFFFFF;
+          background: #FF5A4F;
+        }
+      }
+    }
+
+    &_title {
+      font-size: 14px;
+      letter-spacing: 0.4px;
+      padding-top: 13px;
+      line-height: 120%;
+    }
+
+    &_count {
+      font-size: 12px;
+      letter-spacing: 0.3px;
+      padding-top: 14px;
+      color: #a6a6a6;
+    }
+  }
+}

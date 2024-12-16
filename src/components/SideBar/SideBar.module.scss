@@ -1,0 +1,160 @@
+.sidebar {
+
+  &_open {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #1B1A1D;
+    padding: 16px;
+
+    &__header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 17px;
+    }
+
+    &__close_btn {
+      margin-top: -3px;
+      margin-right: 4px;
+    }
+
+    &__user {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 5px;
+
+      &_avatar {
+      }
+
+      &_info {
+        display: flex;
+        flex-direction: column;
+        align-self: start;
+        margin-top: 3px;
+        margin-left: 8px;
+        font-size: 14px;
+        letter-spacing: 0.5px;
+      }
+
+      &_name {
+        color: #FFFFFF;
+      }
+
+      &_job {
+        color: #787878;
+      }
+    }
+
+    &_logout {
+      display: flex;
+      width: 100%;
+      height: 24px;
+      font-size: 12px;
+      color: #787878;
+      border: none;
+      border-radius: 6px;
+      padding: 3px 101.5px;
+      letter-spacing: 0.3px;
+      background-color: #2D2D2D;
+      cursor: pointer;
+
+      &:hover {
+        color: #FFFFFF;
+      }
+    }
+
+    &__menu {
+      display: flex;
+      flex-direction: column;
+      margin-top: 23px;
+      border-top: 1px solid #2D2D2D;
+
+      &_projects_btn {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 41px;
+        font-size: 14px;
+        color: #FFFFFF;
+        border: none;
+        border-radius: 8px;
+        gap: 10px;
+        letter-spacing: 0.7px;
+        margin-top: 24px;
+        padding: 14px 0 12px 14px;
+        background: transparent;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #2D2D2D;
+        }
+      }
+    }
+  }
+
+  &_close {
+    display: flex;
+    flex-direction: column;
+    min-width: 40px;
+    height: 100vh;
+    background-color: #1B1A1D;
+    padding: 18px 8px 0px 8px;
+
+    &__header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &__menu {
+      display: flex;
+      flex-direction: column;
+      margin-top: 24px;
+      border-top: 1px solid #2D2D2D;
+
+      &_projects_btn {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 31px;
+        font-size: 14px;
+        color: #FFFFFF;
+        border: none;
+        border-radius: 8px;
+        margin-top: 24px;
+        padding: 4px 0 0 6px;
+        background: transparent;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #2D2D2D;
+        }
+      }
+    }
+  }
+
+  &_open__close_btn,
+  &_close__open_btn {
+    position: relative;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 2;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: -2px;
+      right: -4px;
+      display: block;
+      width: 24px;
+      height: 24px;
+      background-color: #2D2D2D;
+      z-index: -1;
+      border-radius: 8px;
+    }
+  }
+}
+

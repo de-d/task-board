@@ -1,0 +1,547 @@
+/* Для модального окна */
+.taskDetailModal {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background-color: rgb(31, 31, 31, 0.5);
+}
+
+.taskContentModal {
+  display: grid;
+  z-index: 20;
+  grid-template-columns: 1fr 37%;
+  column-gap: 16px;
+  max-width: 1200px;
+  width: 82%;
+  min-height: calc(-250px + 90vh);
+  margin: 60px 60px auto;
+  padding: 24px;
+  background: #F4F6F8;
+  border-radius: 16px;
+}
+
+/* Для страницы */
+
+.taskDetailPages{
+  display: flex;
+  justify-content: center;
+}
+
+.taskContentPages {
+  display: grid;
+  z-index: 20;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 16px;
+}
+
+/* _____________ */
+
+.left_panel {
+  padding: 20px;
+  width: 710px;
+  background: #FFFFFF;
+  border-radius: 12px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.task_name {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+
+.task_descriptions {
+  font-size: 13px;
+  font-weight: 400;
+}
+
+
+.comments {
+  display: flex;
+  flex-direction: column;
+}
+
+.comments_title{
+  margin-top: 32px;
+  margin-bottom: 8px;
+  color: #222222;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+
+.comments_button {
+  margin-top: 24px;
+  max-width: 122px;
+  font-size: 14px;
+  font-weight: 400;
+  color: white;
+  padding: 8px 24px 8px 24px;
+  border-radius: 6px;
+  transition: ease 300ms;
+  background: #3787EB;
+}
+
+.comments_button:hover{
+  background: #6aa3f3;
+}
+
+
+/* Модальное окно удаления задачи */
+.modaloverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.confirmModal {
+  border-radius: 8px;
+  padding: 20px;
+  width: 384px;
+  height: 150px;
+  background: white;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.buttonModal{
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+}
+
+.buttonModal button:first-child {
+  color: white;
+  padding: 0 20px;
+  width: 100px;
+  height: 30px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: rgb(55, 135, 235);
+  transition: ease 300ms;
+  outline: none;
+}
+
+.buttonModal button:first-child:hover {
+  background: rgb(44, 108, 188);
+}
+
+.buttonModal button:last-child {
+  color: black;
+  padding: 0 20px;
+  width: 100px;
+  height: 30px;
+  border: 1px solid rgb(225, 229, 233);
+  border-radius: 6px;
+  background-color: white;
+  outline: none;
+  transition: ease 300ms;
+}
+
+.buttonModal button:last-child:hover {
+  color: white;
+  background: black;
+}
+
+
+
+/* Правая панель */
+
+.right_panel {
+  background: #FFFFFF;
+  padding: 20px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.right_panel__header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.right_panel__header span {
+  color: #ABBED1;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.right_panel__header div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.task_select {
+  margin-top: 16px;
+}
+
+
+.taskInfo {
+  display: flex;
+  flex-direction: row;
+  margin-top: 24px;
+  justify-content: flex-start;
+  gap: 24px;
+  font-size: 12px;
+}
+
+.taskInfo_title {
+  color: #ABBED1;
+  font-weight: 400;
+}
+
+.priority_body {
+  padding: 2px 6px 2px 6px;
+  border-radius: 4px;
+}
+
+.stage_body {
+  color: white;
+  padding: 1px 6px 1px 6px;
+  border-radius: 4px;
+}
+
+.type_body {
+  padding: 2px 6px 2px 6px;
+  border-radius: 4px;
+}
+
+
+
+
+.estimation {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.estimation span {
+  color: #ABBED1;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.estimation_time {
+  gap: 6px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.estimation_time span {
+  color: black;
+}
+
+
+
+
+.task_date {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: center;
+}
+
+.task_date_info {
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
+}
+
+.task_date_info span {
+  font-size: 12px;
+  font-weight: 400;
+  color: #ABBED1;
+}
+
+.task_date_begin_date{
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.task_date_begin_date span {
+  font-size: 12px;
+  color: #222222;
+  font-weight: 400;
+}
+
+
+
+
+.project_info{
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.project_info span {
+  font-size: 12px;
+  color: #ABBED1;
+  font-weight: 400;
+}
+
+.project_info a {
+  font-size: 12px;
+  color: #3787EB;
+  gap: 8px;
+}
+
+
+
+
+
+.executor {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.executor_title {
+  font-size: 12px;
+  font-weight: 400;
+  color: #ABBED1;
+}
+
+.executor_detail {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+}
+
+.executor_detail span {
+  font-size: 13px;
+  color:#2D2D2D;
+  font-weight: 400;
+}
+
+
+/* АВАТАР */
+.avatar {
+  mask-image: url('/img/task/mask/avatarMask.png');
+  mask-repeat: no-repeat;
+  height: 32px;
+  width: 32px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.comments_area {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.comments_content{
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #EEEEEE;
+}
+
+.task_icon {
+  cursor: pointer;
+}
+
+.task_icon path {
+  transition: fill 300ms ease;
+}
+
+.task_icon:hover path {
+  fill: #3787EB;
+}
+
+.user{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.userinfo {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+}
+
+.username span {
+  font-size: 12px;
+  color: #2D2D2D;
+  font-weight: 500;
+}
+
+.user_button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.editCross {
+    svg path{
+      stroke: #1B1A1D;
+    }
+    :hover {
+      cursor: pointer;
+    }
+}
+
+.commentsdate span {
+  font-size: 12px;
+  color: #ABBED1;
+  font-weight: 400;
+}
+
+
+.link{
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.task_link {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.link_name{
+  font-size: 12px;
+  color: #ABBED1;
+}
+
+.link_body{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: #3787EB;
+}
+
+
+
+.previewContainer{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 16px;
+  gap: 8px;
+}
+
+
+
+.previewItem {
+  position: relative;
+  height: 150px;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  border-radius: 8px;
+  gap: 12px;
+  background: #F4F6F8;
+}
+
+.deletion {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+
+  svg path {
+    fill: black;
+  }
+
+    &:hover {
+      cursor: pointer;
+
+      svg path {
+        fill: indianred;
+      }
+    }
+}
+
+
+.previewImage {
+  display: flex;
+  align-items: center;
+  width: 180px;
+  height: 90px;
+  border-radius: 8px;
+}
+.previewImage img {
+  border-radius: 8px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.filesImage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+
+
+.ImageInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.previewItem a {
+  font-size: 12px;
+  font-weight: 400;
+  color: #3787EB;
+}
+
+.ImageInfo span  {
+  font-size: 12px;
+  border-radius: 8px;
+  color: #ABBED1
+}
+
+//
