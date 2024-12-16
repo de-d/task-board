@@ -52,3 +52,35 @@ export const CreateTask = async (data: {
       throw err;
     });
 };
+
+interface EditTask {
+  data: createTaskData;
+  id: number;
+}
+
+export const EditTask = async ({ data, id }: EditTask) => {
+  const formData = new FormData();
+  Object.entries(data).forEach(([key, value]) => {
+    if (Array.isArray(value)) {
+      value.forEach((item) => formData.append(`${key}[]`, item.toString()));
+    } else {
+      if (value) {
+        formData.append(key, value.toString());
+      }
+    }
+  });
+
+  return fetch(`${API_URL}/task/${id}`, {
+    method: "PATCH",
+    credentials: "include",
+    body: formData,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then(validateResponse)
+    .catch((err) => {
+      console.log("EditTask function error", err);
+      throw err;
+    });
+};

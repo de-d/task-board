@@ -4,7 +4,7 @@ const token = getCookie("token");
 
 
 // ДОБАВИТЬ КОММЕНАРИЙ
-export const addComments = async ({ formData, taskId }: { formData: FormData; taskId: number }) => {
+export const addComments = async ({ formData, taskId }: { formData: FormData; taskId: number | undefined }) => {
 
     return fetch(`https://trainee-academy.devds.ru/api/task/${taskId}/comment`, {
         method: 'POST',
@@ -27,7 +27,7 @@ export const addFileComments = async (formData:FormData) => {
 }
 
 // УДАЛИТЬ ФАЙЛ ИЗ КОММЕНТАРИЯ
-export const deleteFileComments = async ({commentId, fileId}: {commentId:number, fileId:number}) => {
+export const deleteFileComments = async ({commentId, fileId}: {commentId:number | undefined, fileId:number | undefined}) => {
     return fetch(`https://trainee-academy.devds.ru/api/comment/${commentId}/file/${fileId}`, {
         method: 'DELETE',
         headers: {

@@ -1,3 +1,5 @@
+@use "../../styles/mixin" as *;
+
 /* Для модального окна */
 .taskDetailModal {
   position: fixed;
@@ -544,4 +546,28 @@
   color: #ABBED1
 }
 
+.root {
+  border-radius: 8px;
+  max-width: 304px;
+}
+
+.header {
+  margin-bottom: 5px;
+}
+
+.title {
+  font-size: 16px;
+  color: #222222;
+  font-weight: 600;
+}
+
+.add {
+  @include addButton();
+  padding: 6px;
+}
+
+.cancel {
+  @include cancelButton();
+  padding: 6px;
+}
 //

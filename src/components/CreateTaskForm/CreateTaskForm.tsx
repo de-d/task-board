@@ -11,7 +11,13 @@ import { ProjectInfo } from "@/types/ProjectInfo";
 import { Input, MultiSelect, Select } from "@mantine/core";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
-import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
+import {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import { Controller, useForm } from "react-hook-form";
 import { SelectCustomArrow } from "../SelectCustomArrow/SelectCustomArrow";
 import { DatePickerInput, DateValue } from "@mantine/dates";
@@ -25,7 +31,8 @@ import styles from "./createTaskForm.module.scss";
 import { AttachFileToTask, DownloadFiles } from "@/api/Files";
 import { DatePickerCustomIcon } from "../DatePickerCustomIcon/DatePickerCustomIcon";
 import { fetchProjectInfo } from "@/api/useProjectInfo";
-import { CreateTask } from "@/api/taskInfo";
+import { CreateTask, EditTask } from "@/api/taskInfo";
+import { TaskDetailResponse } from "@/types/Task";
 
 export interface FormTypes {
   name: string;
@@ -48,12 +55,15 @@ export interface createTaskData extends FormTypes {
   release_id?: number | null; // null?
   related_id?: number | null; // null? []?
   epic_id?: number | null; // null?
-  estimate_worker?: number | null; // null?
+  estimate_worker?: number | null;
 }
 
 interface CreateTaskForm {
   setConfirmationOpened: Dispatch<SetStateAction<boolean>>;
+  taskDetail?: TaskDetailResponse; // протипизировать если успеем
 }
+
+type Entries<T> = [keyof T, T[keyof T]][];
 
 const linkRules = {
   value:
@@ -69,7 +79,10 @@ const textEditorIconStyles = {
   control: { border: "none", borderRadius: "0", backgroundColor: "#f4f6f8" },
 };
 
-export const CreateTaskForm = ({ setConfirmationOpened }: CreateTaskForm) => {
+export const CreateTaskForm = ({
+  setConfirmationOpened,
+  taskDetail,
+}: CreateTaskForm) => {
   const { query } = useRouter();
   const slug = Array.isArray(query.slug) ? query.slug[0] : query.slug;
   const [taskTypeText, setTaskTypeText] = useState<string | null>(null);
@@ -81,6 +94,52 @@ export const CreateTaskForm = ({ setConfirmationOpened }: CreateTaskForm) => {
   const [endText, setEndText] = useState<DateValue>(null);
   const [files, setFiles] = useState<FileWithPath[]>([]);
   const [addedTaskId, setAddedTaskId] = useState<number | null>(null);
+
+  useEffect(() => {}, [files]);
+  useEffect(() => {
+    if (taskDetail) {
+      setValue("name", taskDetail?.data.name);
+
+      setValue("task_type_id", taskDetail?.data.task_type.id);
+      setTaskTypeText(taskDetail?.data.task_type.name);
+
+      setValue("component_id", taskDetail?.data.component.id);
+      setComponentText(taskDetail?.data.component.name);
+
+      const executorsId = taskDetail?.data.users.map((item) => item.id);
+      const executorsName = taskDetail?.data.users.map((item) => {
+        return `${item.surname} ${item.name} ${item.patronymic}`;
+      });
+      setValue("executors", executorsId);
+      setExecutorsText(executorsName);
+
+      setValue("priority_id", taskDetail?.data.priority.id);
+      setPriorityText(taskDetail?.data.priority.name);
+
+      setValue("estimate_cost", taskDetail?.data.estimate_cost);
+      setEstimateCostText(taskDetail?.data.estimate_cost?.toString());
+
+      if (taskDetail?.data.begin) {
+        const beginDate = new Date(taskDetail?.data.begin);
+        setValue("begin", taskDetail?.data.begin);
+        setBeginText(beginDate);
+      }
+
+      if (taskDetail?.data.end) {
+        const endDate = new Date(taskDetail?.data.end);
+        setValue("end", taskDetail?.data.end);
+        setEndText(endDate);
+      }
+
+      setValue("description", taskDetail?.data.description);
+
+      setValue("layout_link", taskDetail?.data.layout_link);
+
+      setValue("dev_link", taskDetail?.data.dev_link);
+
+      setValue("markup_link", taskDetail?.data.markup_link);
+    }
+  }, []);
 
   const getProjectData = useQuery<ProjectInfo>(
     {
@@ -135,6 +194,20 @@ export const CreateTaskForm = ({ setConfirmationOpened }: CreateTaskForm) => {
     queryClient
   );
 
+  const editTaskMutation = useMutation(
+    {
+      mutationFn: EditTask,
+
+      async onSuccess(data) {
+        const response = await data.json();
+        const taskId = response.id;
+        queryClient.invalidateQueries({ queryKey: ["taskDetail", taskId] });
+        queryClient.invalidateQueries({ queryKey: ["projectTask", slug] });
+      },
+    },
+    queryClient
+  );
+
   const downLoadFilesMutation = useMutation(
     {
       mutationFn: DownloadFiles,
@@ -156,6 +229,9 @@ export const CreateTaskForm = ({ setConfirmationOpened }: CreateTaskForm) => {
   const attachFileToTaskMutation = useMutation(
     {
       mutationFn: AttachFileToTask,
+      onSuccess() {
+        setFiles([]);
+      },
     },
 
     queryClient
@@ -177,8 +253,6 @@ export const CreateTaskForm = ({ setConfirmationOpened }: CreateTaskForm) => {
     clearErrors,
   } = useForm<FormTypes>();
 
-  type Entries<T> = [keyof T, T[keyof T]][];
-
   const resetValues = () => {
     reset();
     clearErrors();
@@ -187,18 +261,21 @@ export const CreateTaskForm = ({ setConfirmationOpened }: CreateTaskForm) => {
     setExecutorsText([]);
     setPriorityText(null);
     setEstimateCostText(null);
-    setEstimateCostText(null);
     setValue("estimate_cost", null);
     setValue("begin", null);
+    setBeginText(null);
     setValue("end", null);
+    setEndText(null);
     setValue("description", null);
     editor?.commands.clearContent();
     setValue("layout_link", null);
-    setFiles([]);
+    setValue("dev_link", null);
+    setValue("markup_link", null);
   };
 
   const onSubmit = (formData: FormTypes) => {
     const formattedFormData: createTaskData = { ...formData, stage_id: 1 };
+
     (Object.entries(formattedFormData) as Entries<createTaskData>).forEach(
       ([key, value]) => {
         if (value) {
@@ -219,14 +296,23 @@ export const CreateTaskForm = ({ setConfirmationOpened }: CreateTaskForm) => {
       }
     );
 
-    if (slug) {
+    if (taskDetail) {
       const data: {
-        taskData: createTaskData;
-        slug: string;
-      } = { taskData: formattedFormData, slug: slug };
-
-      createTaskMutation.mutate(data);
+        data: createTaskData;
+        id: number;
+      } = { data: formattedFormData, id: taskDetail?.data.id };
+      editTaskMutation.mutate(data);
       resetValues();
+    } else {
+      if (slug) {
+        const data: {
+          taskData: createTaskData;
+          slug: string;
+        } = { taskData: formattedFormData, slug: slug };
+
+        createTaskMutation.mutate(data);
+        resetValues();
+      }
     }
   };
 
@@ -236,7 +322,7 @@ export const CreateTaskForm = ({ setConfirmationOpened }: CreateTaskForm) => {
       Link,
       TextAlign.configure({ types: ["heading", "paragraph"] }),
     ],
-    content: null,
+    content: taskDetail?.data.description || null,
     onUpdate: ({ editor }) => {
       const editorText = editor?.getText();
       setValue("description", editorText);
@@ -382,6 +468,22 @@ export const CreateTaskForm = ({ setConfirmationOpened }: CreateTaskForm) => {
     return (
       <div key={index} className={styles.file}>
         <p className={styles.descr}>{file.name}</p>
+        <button
+          className={styles.button}
+          onClick={() => handleDeleteFile(index)}
+          type="button"
+        >
+          <span className={styles.line}></span>
+          <span className={styles.line}></span>
+        </button>
+      </div>
+    );
+  });
+
+  const previewsTaskDetail = taskDetail?.data.files.map((file, index) => {
+    return (
+      <div key={index} className={styles.file}>
+        <p className={styles.descr}>{file.original_name}</p>
         <button
           className={styles.button}
           onClick={() => handleDeleteFile(index)}
@@ -646,7 +748,9 @@ export const CreateTaskForm = ({ setConfirmationOpened }: CreateTaskForm) => {
         />
       </Input.Wrapper>
       <Input.Wrapper className={styles.dropzone}>
-        <div className={styles.previews}>{previews}</div>
+        <div className={styles.previews}>
+          {taskDetail ? previewsTaskDetail : previews}
+        </div>
         <Dropzone
           className={styles["mantine-Dropzone-root"]}
           onDrop={handleDropZoneChange}
